@@ -1,1 +1,9 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+When sum2DArray() is invoked, the first message "Sum called ..." gets logged to the console.
+
+For both cases (the non-empty array2D and the empty array), the message "Returning from sum" is logged immediately. This happens because creating the promise and the console.log() are synchronous operations, meaning they execute right away.
+
+In the case of the empty array, the promise is rejected immediately since the length of the array is zero. This triggers the error message "Cannot sum an empty array", and the .catch() block logs the error to the console as "Error: Cannot sum an empty array".
+
+In the case of the non-empty array, the setTimeout() function simulates an asynchronous operation, meaning the actual summing of the array doesn't happen until after the current call stack finishes. Once the timeout is triggered, it begins summing the array elements, logging each addition, e.g., "Adding X to sum". Once the sum is calculated, the promise is resolved, and the .then() block logs the final result as "1- Sum of array2D: 45".
